@@ -32,3 +32,28 @@ A log of the actual prompts used to build this project, in order.
 **What it produced:** Opened `index.html` in the default browser for a manual check — header, empty middle section, and footer rendering with no console errors, before treating the scaffold as ready for commit #1.
 
 **Notes:** Verifying before every commit, not just at the end, so problems get caught at the step that introduced them.
+
+---
+
+## Build "Add item" feature
+
+**Prompt:**
+> Now implement the "Add item" feature: a text input and button that adds the
+> typed value as a new item to a visible list. Keep it scoped to just this —
+> no checkbox functionality yet.
+
+**What it produced:** Added a text input (`#item-input`) and "Add Item" button (`#add-item-btn`) inside `add-item-section`, and a `<ul id="checklist">` inside `checklist-section` in `index.html`. Added `script.js` logic: `addItem()` reads the trimmed input value, appends it as a new `<li>` to the checklist, clears the input, and refocuses it. Wired to both the button click and pressing Enter in the input.
+
+**Notes:** Deliberately left check-off/strikethrough logic out — scoped to add-only, per Builder Loop (one feature at a time, verify, then commit).
+
+---
+
+## Verify "Add item" feature before committing
+
+**Prompt:**
+> Verified that items append to list and text input field clears, additionally
+> no console errors in the browser tools.
+
+**What it produced:** Manual verification in-browser: typed values append as new `<li>` items via both the "Add Item" button click and pressing Enter, input field clears and refocuses after each add, and no console errors — confirming the feature works as scoped before committing.
+
+**Notes:** Verify-before-commit step per Builder Loop.
