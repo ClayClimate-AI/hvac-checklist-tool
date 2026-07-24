@@ -18,3 +18,12 @@ main {
 footer {
   padding: 1rem;
 }
+
+#checklist li {
+  cursor: pointer;
+}
+
+#checklist li.checked {
+  text-decoration: line-through;
+  color: #888;
+}

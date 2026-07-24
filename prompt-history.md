@@ -57,3 +57,33 @@ A log of the actual prompts used to build this project, in order.
 **What it produced:** Manual verification in-browser: typed values append as new `<li>` items via both the "Add Item" button click and pressing Enter, input field clears and refocuses after each add, and no console errors — confirming the feature works as scoped before committing.
 
 **Notes:** Verify-before-commit step per Builder Loop.
+
+---
+
+## Build "Check off item" feature
+
+**Note:** This entry is reconstructed rather than verbatim — a one-time exception, since the feature was built in Cursor before prompt-by-prompt logging was formalized in CLAUDE.md. Going forward, entries are logged verbatim as they happen, including any clarifying question Claude asks and the answer given (per the Reverse Prompting rule).
+
+**Prompt:**
+> Now implement the "Check off item" feature: clicking an item in the checklist
+> should mark it as checked off, and clicking it again should un-mark it. Keep
+> it scoped to just this — no other functionality.
+
+**What it produced:** Added a click event listener to each new `<li>` inside `addItem()` in `script.js` that toggles a `checked` class on the clicked item. Added matching CSS in `style.css`: `#checklist li` gets `cursor: pointer`, and `#checklist li.checked` applies `text-decoration: line-through` and gray (`#888`) text.
+
+**Notes:** Scoped to check-off only, per Builder Loop.
+
+---
+
+## Verify "Check off item" feature before committing
+
+**Prompt (Agent Verification Loop):**
+> Claude stated expected outcome: clicking an item adds strikethrough + gray
+> text; clicking it again removes both; other items are unaffected; no
+> console errors either direction.
+>
+> User response: "The check off feature has been checked and verified"
+
+**What it produced:** Confirmed in-browser — clicking toggles strikethrough/gray text on and off as expected, independently per item, no console errors — before treating the feature as verified and ready to commit.
+
+**Notes:** First use of the Agent Verification Loop (CLAUDE.md addition) — Claude's stated expected outcome is logged alongside the user's confirmation, not just the confirmation alone.

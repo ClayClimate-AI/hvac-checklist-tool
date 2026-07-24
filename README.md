@@ -16,11 +16,10 @@ I started by identifying the problem and value above before writing any code. Fr
 
 ## Features
 **Complete:**
-- *(none yet — project scaffold only, functionality in progress)*
+- Add a tool/part item to the checklist — a tech types a tool or part name and adds it to a running list before heading to a job site.
+- Check off an item once it's confirmed packed — clicking an item strikes it through, so a tech can see at a glance what's still missing before leaving.
 
 **Planned:**
-- Add a tool/part item to the checklist
-- Check off an item once it's confirmed packed
 - View the current checklist
 - Save and reuse checklist templates by job type (e.g. "Tabit install," "RTU service call")
 - Flag an item that doesn't match what the work order specifies
