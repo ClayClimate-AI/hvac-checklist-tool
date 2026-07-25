@@ -208,3 +208,58 @@ A log of the actual prompts used to build this project, in order.
 **Fix:** No code changed — asked the user to hard refresh (Cmd+Shift+R) or reopen `index.html` in a fresh tab, then re-test.
 
 **Confirmed:** User did a hard refresh in Firefox — `confirm()` dialog now appears correctly ("Clear all items?" with Cancel/OK), before any items are removed. Feature verified as working as designed.
+
+---
+
+## Pushing back — does this app actually solve anything?
+
+**Prompt:**
+> Okay, well first and foremost I just wanted to ask how does this solve a
+> problem? And how is this any different than somebody opening up their
+> notes app?
+
+**Why I asked:** Wanted to honestly test whether this project had real value,
+or whether I'd just built something a generic notes app already does — before
+committing to that framing in my README or interview.
+
+**Answer:** A notes app with checklist support could technically do the same
+basic task. What actually differentiates this app is smaller than "solves an
+unsolvable problem": it removes setup friction (already checklist-shaped,
+zero formatting needed, live count instead of manual recounting), and it's a
+purpose-built foundation that can grow toward the real workflow (per-job
+templates, mismatch flags) in ways a generic notes app never will. More
+importantly, this project isn't graded on inventing something novel — it's
+graded on identifying a real friction point, scoping a small solution, and
+documenting the build process deliberately. Asking this question, and being
+able to answer it honestly instead of overselling the app, is itself part of
+that evidence.
+
+**What changed:** No code changed. This clarified how to talk about the
+project's actual value honestly — friction reduction and process, not a claim
+of solving something no other tool can do.
+
+---
+
+## Explaining/understanding — updateChecklistStatus()
+
+**Prompt:**
+> Walk me through updateChecklistStatus() — purpose, inputs, outputs, and the
+> order things happen in.
+
+**Answer:**
+> Purpose: Keeps the status line in sync with the checklist's current state
+> — this is the "View list" feature's core logic. Inputs: None passed as
+> parameters — it reads live from the DOM, specifically the `<li>` children
+> of `checklist`. Outputs: Sets `checklistStatus.textContent` to either the
+> empty-state message or a formatted count string, and toggles a CSS class
+> (`empty`) on that same element. Returns nothing. Order of operations:
+> (1) `checklist.querySelectorAll('li')` grabs every item currently in the
+> list, `.length` gives `total`; (2) `checklistStatus.classList.toggle('empty',
+> total === 0)` runs before the branch below, so the class is always correct
+> regardless of which message ends up displayed; (3) if `total === 0`, set the
+> empty-state text and `return` immediately; (4) otherwise query
+> `li.checked` elements for `packed`, compute `remaining = total - packed`,
+> and render "N items · N packed · N remaining." Called from `addItem()`,
+> the per-item click listener, `clearList()`, and once on initial page load.
+
+**What I confirmed I understand:** updateChecklistStatus() reads the checklist directly from the page instead of being passed anything — it counts every `<li>` for the total, counts how many have the `checked` class for packed, and does the subtraction for remaining. If there are zero items it shows the empty-state message and stops there; otherwise it builds the "N items · N packed · N remaining" string. It also toggles the `empty` CSS class first, before either branch runs, so the styling is always correct no matter which message ends up showing. It gets called every time the list changes — after adding, after checking/unchecking, and after clearing — plus once when the page first loads.
