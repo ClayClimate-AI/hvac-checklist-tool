@@ -4,6 +4,7 @@ const itemInput = document.getElementById('item-input');
 const addItemBtn = document.getElementById('add-item-btn');
 const checklist = document.getElementById('checklist');
 const checklistStatus = document.getElementById('checklist-status');
+const clearListBtn = document.getElementById('clear-list-btn');
 
 /**
  * Purpose: Keep the status line in sync with the current state of the
@@ -60,9 +61,30 @@ function addItem() {
   updateChecklistStatus();
 }
 
+/**
+ * Purpose: Let a tech wipe the current checklist to start a new job,
+ *   after confirming they actually want to.
+ * Inputs: None directly — reads user response from the browser's
+ *   native confirm() dialog.
+ * Outputs: If confirmed, removes all `<li>` children from `checklist`
+ *   and resets `checklistStatus` back to the empty state. If
+ *   cancelled, nothing changes. Returns nothing.
+ * Flow: Show a confirm() dialog. If the user cancels, bail out. If
+ *   confirmed, clear the list's contents and call
+ *   updateChecklistStatus() to reset the status line.
+ */
+function clearList() {
+  const confirmed = confirm('Clear all items?');
+  if (!confirmed) return;
+
+  checklist.innerHTML = '';
+  updateChecklistStatus();
+}
+
 addItemBtn.addEventListener('click', addItem);
 itemInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') addItem();
 });
+clearListBtn.addEventListener('click', clearList);
 
 updateChecklistStatus();

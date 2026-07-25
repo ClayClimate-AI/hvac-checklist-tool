@@ -79,3 +79,13 @@ footer {
   text-decoration: line-through;
   color: #888;
 }
+
+#clear-list-btn {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+}

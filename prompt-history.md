@@ -168,3 +168,43 @@ A log of the actual prompts used to build this project, in order.
 **What it produced:** Wrapped `header`/`main`/`footer` in a new `.page` container in `index.html` (structural markup only, no new functionality) so they share one centered max-width column (550px, `margin: 2.5rem auto 0`). Set `body { text-align: center }`. Added `justify-content: center` to `#add-item-section`, a max-width on `#item-input` so it doesn't stretch full width, `list-style-position: inside` on `#checklist` so bullets center with the text, and increased margin/padding for spacing between sections. Added `#checklist-status.empty` rule (muted gray, italic). In `script.js`, added one line inside `updateChecklistStatus()`: `checklistStatus.classList.toggle('empty', total === 0)`.
 
 **Notes:** Formatting-only per Scope guard, aside from the one flagged/approved JS line. No docstring changes needed since the toggle line doesn't change `updateChecklistStatus()`'s documented purpose/inputs/outputs/flow.
+
+---
+
+## Build "Clear list" feature (stretch)
+
+**Prompt:**
+> Wonderful. Looks like the application is working and functionality is on
+> par. One observation I wanted to point out: The application lacks the
+> ability to clear all list items, when the user needs a new list created.
+> That being said, Add a "Clear list" button below the checklist. Clicking it
+> should show a confirm() dialog first ("Clear all items?" or similar) — only
+> if the user confirms, remove all items from the list and reset the status
+> count/empty-state message back to zero. If the user cancels, nothing
+> changes. This is a stretch feature — Add/Check off/View are the three
+> required features, already built and committed. State your expected
+> behavior before I test it in the browser.
+
+**What it produced:** Added a "Clear List" `<button id="clear-list-btn">` below the `<ul>` in `index.html`. Added `clearList()` in `script.js`: shows `confirm('Clear all items?')`, bails out if cancelled, otherwise empties `checklist.innerHTML` and calls `updateChecklistStatus()` to reset the status line. Wired to `clearListBtn`'s click event. Added an outlined `#clear-list-btn` style (accent-colored border/text, transparent background) in `style.css`.
+
+**Notes:** First stretch feature. Full per-commit checklist applies (docstrings, CODE_BREAKDOWN.md, README, verification loop) since it's a real feature, not a formatting pass.
+
+---
+
+## Debugging — confirm() dialog not appearing on first test
+
+**Prompt:**
+> The Clear List button is working — it successfully clears all items and
+> resets the count/empty-state. But the confirm() dialog isn't appearing
+> before it clears — it's clearing immediately with no verification step.
+> Please check the click handler and make sure confirm('Clear all items?')
+> is actually being called and its return value is checked before the clear
+> logic runs. State what you expect to happen, then I'll re-test.
+
+**What broke:** `confirm()` dialog wasn't appearing before the list cleared, on first test.
+
+**Why:** Reviewed `script.js` line by line — `clearList()` was already correctly calling `confirm('Clear all items?')` and checking its return value (`if (!confirmed) return;`) before clearing. No duplicate listeners or inline handlers found. Concluded the browser tab was serving a stale cached copy of `script.js` from before the feature existed — common with local `file://` testing where a normal refresh doesn't always reload linked script files.
+
+**Fix:** No code changed — asked the user to hard refresh (Cmd+Shift+R) or reopen `index.html` in a fresh tab, then re-test.
+
+**Confirmed:** User did a hard refresh in Firefox — `confirm()` dialog now appears correctly ("Clear all items?" with Cancel/OK), before any items are removed. Feature verified as working as designed.
