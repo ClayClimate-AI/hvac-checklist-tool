@@ -133,3 +133,18 @@ A log of the actual prompts used to build this project, in order.
 **What it produced:** Confirmed in-browser — status line matched expected text at every step (empty state, after adds, after check/uncheck), no console errors — before treating the feature as verified and ready to commit.
 
 **Notes:** All three required features (Add item, Check off item, View list) are now built and verified.
+
+---
+
+## Light CSS pass (styling only, no functional changes)
+
+**Prompt:**
+> Do a light CSS pass only — no functional changes. Add reasonable padding
+> around the container, spacing between elements, a border-radius on the
+> input and button, and one accent color used consistently (e.g. for the
+> Add button and the status count). Keep it simple and clean, not
+> decorative. This is a styling-only change — do not touch script.js.
+
+**What it produced:** Added a `--accent` CSS variable (`#2563eb`), applied to the "Add Item" button background and the `#checklist-status` text color. Centered `main` as a max-width container with more generous padding. Added flex layout + gap between the input and button, margin-bottom spacing between sections and list items, and `border-radius: 6px` on both the input and button. No changes to `index.html` or `script.js`.
+
+**Notes:** Per the Scope guard rule, this is a formatting-only change and doesn't require the full per-commit checklist (no docstrings, no README update, no CODE_BREAKDOWN.md update needed) — just this lighter prompt-history entry.
