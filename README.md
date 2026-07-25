@@ -1,9 +1,7 @@
 # HVAC Tool & Parts Checklist
 
 ## Live Demo
-[View my project here](PASTE-YOUR-GITHUB-PAGES-LINK-HERE)
-
-*(Update this link once the project is deployed via GitHub Pages — Settings → Pages → Source: main branch → /root.)*
+[View my project here](https://clayclimate-ai.github.io/hvac-checklist-tool/)
 
 ## Problem
 When I worked HVAC install and refrigeration for Pappas Restaurants, the work order didn't always match what was actually at the job site. One specific example: I was sent out for a Tabit monitor-arm install, but the arm listed on the work order didn't match the actual kitchen monitor setup on-site — which meant a wasted return trip back to the warehouse to get the right part. Tools and parts were also unevenly distributed among techs, so it wasn't always obvious what I already had versus what I needed to grab before heading out.
