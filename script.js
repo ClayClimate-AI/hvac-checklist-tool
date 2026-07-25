@@ -3,6 +3,30 @@
 const itemInput = document.getElementById('item-input');
 const addItemBtn = document.getElementById('add-item-btn');
 const checklist = document.getElementById('checklist');
+const checklistStatus = document.getElementById('checklist-status');
+
+/**
+ * Purpose: Keep the status line in sync with the current state of the
+ *   checklist — either an empty-state message or a live item count.
+ * Inputs: None directly — reads the current `<li>` children of `checklist`.
+ * Outputs: Updates the text content of `checklistStatus`. Returns nothing.
+ * Flow: Count all `<li>` items and how many have the "checked" class.
+ *   If there are no items, show the empty-state message. Otherwise show
+ *   "N items · N packed · N remaining".
+ */
+function updateChecklistStatus() {
+  const items = checklist.querySelectorAll('li');
+  const total = items.length;
+
+  if (total === 0) {
+    checklistStatus.textContent = 'No items yet — add a tool or part above.';
+    return;
+  }
+
+  const packed = checklist.querySelectorAll('li.checked').length;
+  const remaining = total - packed;
+  checklistStatus.textContent = `${total} items · ${packed} packed · ${remaining} remaining`;
+}
 
 /**
  * Purpose: Add whatever the tech typed into the checklist as a new item.
@@ -25,14 +49,18 @@ function addItem() {
   // Flow: each new <li> gets its own listener, so items toggle independently.
   li.addEventListener('click', () => {
     li.classList.toggle('checked');
+    updateChecklistStatus();
   });
   checklist.appendChild(li);
 
   itemInput.value = '';
   itemInput.focus();
+  updateChecklistStatus();
 }
 
 addItemBtn.addEventListener('click', addItem);
 itemInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') addItem();
 });
+
+updateChecklistStatus();

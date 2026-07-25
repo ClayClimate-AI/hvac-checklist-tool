@@ -87,3 +87,49 @@ A log of the actual prompts used to build this project, in order.
 **What it produced:** Confirmed in-browser — clicking toggles strikethrough/gray text on and off as expected, independently per item, no console errors — before treating the feature as verified and ready to commit.
 
 **Notes:** First use of the Agent Verification Loop (CLAUDE.md addition) — Claude's stated expected outcome is logged alongside the user's confirmation, not just the confirmation alone.
+
+---
+
+## Clarifying question — scope of "View list" feature
+
+**User's question:**
+> Right now items display automatically because of how "Add item" works —
+> is that sufficient to count as the required "View list" feature on its own,
+> or does Next Chapter's spec expect something more deliberate, like a
+> dedicated view/count/empty-state, before I can commit and document it as
+> its own completed feature?
+
+**Claude's answer:** Auto-display alone isn't enough to count as its own feature — the Planning Worksheet already lists Add / Check off / View as three separate Required Features and frames the Smallest Demo as three sequential steps. Recommended keeping "View" small but deliberate: a live item count (e.g. "3 items, 1 checked") and/or an empty-state message ("No items yet — add a tool or part above"), so it has its own scoped, verifiable before/after state rather than riding on "Add item."
+
+**Notes:** First use of the Reverse Prompting rule (CLAUDE.md addition) — question and answer logged together.
+
+---
+
+## Build "View list" feature
+
+**Prompt:**
+> Build the "View list" feature — the third required feature (Add item and
+> Check off item are already built and committed). Add a live count that
+> updates automatically: total items, packed count, and remaining count,
+> formatted like "3 items · 1 packed · 2 remaining." When the list has zero
+> items, show an empty-state message instead: "No items yet — add a tool or
+> part above." State your expected behavior before I test it in the browser.
+
+**What it produced:** Added `#checklist-status` `<p>` in `index.html`. Added `updateChecklistStatus()` in `script.js`, which shows an empty-state message when there are zero items, otherwise "N items · N packed · N remaining." Called it after every add and every check-off toggle, plus once on page load. Added a small `#checklist-status` style rule in `style.css`.
+
+**Notes:** Third and final required feature per the Planning Worksheet.
+
+---
+
+## Verify "View list" feature before committing
+
+**Prompt (Agent Verification Loop):**
+> Claude stated expected outcome: empty-state message at zero items; count
+> updates correctly on add; count updates correctly on check-off toggle in
+> both directions; no console errors.
+>
+> User response: "Tested it, matches your expected outcome, no console errors"
+
+**What it produced:** Confirmed in-browser — status line matched expected text at every step (empty state, after adds, after check/uncheck), no console errors — before treating the feature as verified and ready to commit.
+
+**Notes:** All three required features (Add item, Check off item, View list) are now built and verified.

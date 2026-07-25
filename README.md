@@ -18,9 +18,9 @@ I started by identifying the problem and value above before writing any code. Fr
 **Complete:**
 - Add a tool/part item to the checklist — a tech types a tool or part name and adds it to a running list before heading to a job site.
 - Check off an item once it's confirmed packed — clicking an item strikes it through, so a tech can see at a glance what's still missing before leaving.
+- View the current checklist — a live status line shows total items, how many are packed, and how many remain (or an empty-state message when the list is empty), so a tech can see progress at a glance before leaving.
 
 **Planned:**
-- View the current checklist
 - Save and reuse checklist templates by job type (e.g. "Tabit install," "RTU service call")
 - Flag an item that doesn't match what the work order specifies
 - Clear the list to start a new job
