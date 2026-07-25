@@ -18,6 +18,8 @@ function updateChecklistStatus() {
   const items = checklist.querySelectorAll('li');
   const total = items.length;
 
+  checklistStatus.classList.toggle('empty', total === 0);
+
   if (total === 0) {
     checklistStatus.textContent = 'No items yet — add a tool or part above.';
     return;

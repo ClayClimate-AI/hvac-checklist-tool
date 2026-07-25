@@ -148,3 +148,23 @@ A log of the actual prompts used to build this project, in order.
 **What it produced:** Added a `--accent` CSS variable (`#2563eb`), applied to the "Add Item" button background and the `#checklist-status` text color. Centered `main` as a max-width container with more generous padding. Added flex layout + gap between the input and button, margin-bottom spacing between sections and list items, and `border-radius: 6px` on both the input and button. No changes to `index.html` or `script.js`.
 
 **Notes:** Per the Scope guard rule, this is a formatting-only change and doesn't require the full per-commit checklist (no docstrings, no README update, no CODE_BREAKDOWN.md update needed) — just this lighter prompt-history entry.
+
+---
+
+## Second CSS pass — centering + empty-state look (styling only)
+
+**Prompt:**
+> One more light CSS pass, styling only — no functional changes, don't touch
+> script.js. Center everything on the page: title, the input/button row, the
+> status count, the item list, and the footer line should all be centered and
+> aligned within a single max-width container (around 500-600px), not left-
+> justified or pushed to one side. Add some top margin so it's not flush to
+> the browser edge, and a bit more spacing between sections. Change the
+> empty-state message so it doesn't look like a clickable link — muted gray
+> or italic instead of blue.
+
+**Flagged conflict:** CSS alone can't distinguish the empty-state text from the live-count text on `#checklist-status` — both were the same element with no class to hook a different color to. Asked whether to allow a 1-line `script.js` change (a class toggle) or keep both states styled identically. User chose to allow the 1-line change.
+
+**What it produced:** Wrapped `header`/`main`/`footer` in a new `.page` container in `index.html` (structural markup only, no new functionality) so they share one centered max-width column (550px, `margin: 2.5rem auto 0`). Set `body { text-align: center }`. Added `justify-content: center` to `#add-item-section`, a max-width on `#item-input` so it doesn't stretch full width, `list-style-position: inside` on `#checklist` so bullets center with the text, and increased margin/padding for spacing between sections. Added `#checklist-status.empty` rule (muted gray, italic). In `script.js`, added one line inside `updateChecklistStatus()`: `checklistStatus.classList.toggle('empty', total === 0)`.
+
+**Notes:** Formatting-only per Scope guard, aside from the one flagged/approved JS line. No docstring changes needed since the toggle line doesn't change `updateChecklistStatus()`'s documented purpose/inputs/outputs/flow.
